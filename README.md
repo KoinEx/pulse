@@ -37,9 +37,11 @@ Following API are exposed for Dapp Development :
 ```
 1. eosWallet.connect() : To connect the Dapp with extension.
 
-2. eosWallet.sendTransaction({to:"helloworld12",amount:"1.0000",symbol:"EOS",memo:"h"}): This API helps to send the EOS from Dapp to desired destination.
+2. eosWallet.sendTransaction({to:"helloworld12",amount:"1.0000",symbol:"EOS",memo:"h"}): 
+This API helps to send the EOS from Dapp to desired destination.
 
 3. eosWallet.sendCustomAction("mytokenanccnt","transfer",{from:"giveurselectedaccountname",to:"helloworld12",amount:"1.0000",symbol:"EOS",memo:"h"}):
+   
    Helps in performing custom actions from selected contract.
     
 ```
