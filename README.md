@@ -53,7 +53,7 @@ This API helps to send the EOS from Dapp to desired destination.
 
 ## Contributing
 
-We have put all of our contribution guidelines into [CONTRIBUTION.md](CONTRIBUTION.md!) Check it out to get started.
+We have put all of our contribution guidelines into [CONTRIBUTION.md](CONTRIBUTION.md) Check it out to get started.
 
 ## Authors
 
