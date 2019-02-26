@@ -1,0 +1,29 @@
+<div class="transaction-history margin-top-20" ng-init="vm.getTransactionHistory()">
+    <div class="close-button" ng-click="vm.gotoDashboard()"></div>
+    <div class="balance margin-top-40">Balance : {{vm.balance}} EOS  </div>
+    <div class="title margin-top-10 uppercase">Transaction History</div>
+    <div class="tabs margin-top-20">
+      <div ng-class="vm.selectedTab == 'submitted' ? 'submitted-background submitted-text padding-left-10 tab text-left':  'padding-left-10 tab text-left' " ng-click="vm.changeSelectedTab('submitted')"> 
+        <img src="/assets/images/submitted-gray.png" alt="" class="width-10" ng-if="vm.selectedTab != 'submitted'"> 
+        <img src="/assets/images/submitted-selected.png" alt="" class="width-10" ng-if="vm.selectedTab == 'submitted'"> 
+        Submitted
+      </div>
+      <div ng-class="vm.selectedTab == 'confirmed' ? 'confirmed-background confirmed-text tab text-center'  :'tab text-center'" ng-click="vm.changeSelectedTab('confirmed')">
+         <img src="/assets/images/confirmed-gray.png" alt="" class="width-10" ng-if="vm.selectedTab != 'confirmed'"> 
+         <img src="/assets/images/confirmed-selected.png" alt="" class="width-10" ng-if="vm.selectedTab == 'confirmed'"> 
+         Confirmed</div>
+      <div ng-class="vm.selectedTab == 'failed' ? 'failed-background failed-text tab text-right padding-right-10' :'tab text-right padding-right-10'" ng-click="vm.changeSelectedTab('failed')"> 
+        <img src="/assets/images/failed-gray.png" alt="" class="width-10" ng-if="vm.selectedTab != 'failed'">
+        <img src="/assets/images/failed-selected.png" alt="" class="width-10" ng-if="vm.selectedTab == 'failed'">
+         Failed</div>
+      <div class="tab-data">
+        <div class="row {{vm.selectedTab}}-background" ng-repeat="transaction in vm.transactionHistory" ng-if="vm.selectedTab === transaction.status || vm.selectedTab === 'all'">
+            <label for="" class="textMiddle bold pointer width-100"> <span> {{(transaction.data.quantity.split(' ')[1]) || 'eos' | uppercase}} </span><span class="capitalize"> &nbsp; &nbsp; {{transaction.action}} </span> <span class="{{transaction.status}} capitalize right" ng-if="vm.selectedTab == 'all'">  {{ transaction.status }} </span></label>
+            <ng-letter-avatar class="avatar pointer" data='{{transaction.status}}'fontSize="10px" auto-color="true" width="30px" height="30px" dynamic="true" shape="round"></ng-letter-avatar>
+            <label for="" class="right asset-value pointer" style="width:80%;"> {{ transaction.data.quantity || '0.0000 EOS' }} </label>
+            <label for="" class="right color-gray flex-sapce-bw width-100 pointer"> <span> #{{$index + 1}} {{transaction.submitted_at |date:'dd.MM.yyyy, hh:mm a' }} </span> <span>$ {{transaction.data.quantity.split(' ')[0] * 60 }} USD</span> </label>
+            <label  ng-class="transaction.id ?'right color-gray flex-sapce-bw width-100 pointer tooltip-txn': 'right color-gray flex-sapce-bw width-100 pointer' " tooltip-text="{{vm.copyText}}" tooltip-top="10px" tooltip-left="15px" clipboard text="transaction.id" on-copied="vm.success()" on-error="vm.fail(err)"  style="margin-top: 5px;border-top: 1px solid #bebebe40;padding-top: 5px;"> <span > Transaction ID : {{transaction.id.substring(0,30)}} ....   </span> </label>
+        </div>
+      </div>
+    </div>
+  </div>

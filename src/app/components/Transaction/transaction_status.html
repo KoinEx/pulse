@@ -1,0 +1,30 @@
+<div class="top-header" title="Transaction {{ vm.transaction.status == 'failed' ? 'failed' : 'Successful'}}" >
+    <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+  </div>
+<div class="border-form margin-top-30" ng-init="vm.transactionStatus()">
+    <div class="confirmation-box margin-top-40">
+        <div class="elements width-100" ng-repeat="(key,value) in vm.transaction" ng-if="key != 'status' && key != 'reason'">
+          <label class="key capitalize" > {{ vm.remove_(key) }}  </label>
+          <label class="value ellipses" >  {{ value }} </label>
+        </div>
+    </div>
+    <div class="margin-top-30" ng-if="vm.transaction.status !== 'failed' && (vm.currentNetwork == 'testnet' || vm.currentNetwork == 'mainnet') ">
+      <div class="elements" >
+        <label>Explorer URL </label>
+      </div>
+      <div class="elements" ng-if="vm.transaction.status !== 'failed'">
+        <div class="input center-flex">
+            <a ng-href="https://{{vm.currentNetwork == 'testnet' ? 'jungle.' : '' }}bloks.io/transaction/{{vm.transactionHistory[vm.transactionHistory.length - 1].id}}" target="_blank" >Click to view transaction on explorer</a>
+        </div>
+      </div>
+      
+      </div>
+      <div class="elements margin-top-10" ng-if="vm.transaction.status === 'failed' ">
+          <div class="error" > {{ vm.transaction.reason  }} </div>
+      </div>
+
+      <div class="submit_button margin-bottom-10 margin-top-10" >
+          <button  ng-click="vm.gotoDashboard()">DONE</button>
+        </div>
+    </div>
+  </div>

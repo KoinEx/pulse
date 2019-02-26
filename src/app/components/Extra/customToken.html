@@ -1,0 +1,44 @@
+<div class="top-header" title="Add Custom Token">
+  <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+</div>
+<div class="border-form margin-top-30">
+    <div class="elements">
+      <label> Add custom token which you have acquired on EOS Blockchain  </label>
+    </div>
+    <div class="elements margin-top-20">
+      <label for="contract"> Token/Contract Address  </label>
+      <input autocomplete="off" type="text" name="contract" ng-model="vm.customToken.contract" placeholder="eosio.token">
+    </div>
+  
+    <div class="elements">
+      <label for="token"> Token Symbol </label>
+      <input autocomplete="off" type="text" name="token" ng-model="vm.customToken.token" placeholder="EOS">
+    </div>
+
+    <div class="elements">
+      <label for="host"> Decimal Precision </label>
+      <input autocomplete="off" type="text" name="host" ng-model="vm.customToken.decimalPrecision" placeholder="4">
+    </div>
+  
+    <div class="elements">
+      <div class="error" ng-show="vm.error"> {{vm.error}} </div>
+    </div> 
+  
+    <div class="elements flex-sapce-bw margin-top-10 margin-left-10 position-bottom">
+      <button ng-class="vm.ladda ? 'cancel_button margin-right-20': 'cancel_button margin-right-20' " ng-click="vm.ladda || vm.gotoDashboard()" ><span ng-if="!vm.ladda">CANCEL</span> <div ng-if="vm.ladda" class="indicator"> 
+        <svg width="16px" height="12px">
+          <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        </svg>
+      </div> 
+      </button>
+      <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-20' :'submit_button margin-left-20'">
+        <button class="width-100" ng-click="vm.ladda || vm.addToken()" ><span ng-if="!vm.ladda">ADD TOKEN</span> <div ng-if="vm.ladda" class="indicator"> 
+            <svg width="16px" height="12px">
+              <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg></div> 
+          </button>
+      </div>
+    </div>
+  </div>

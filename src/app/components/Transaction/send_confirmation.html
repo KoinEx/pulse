@@ -1,0 +1,51 @@
+<div class="top-header" title="Confirm Transaction">
+  <button class="right" ng-click="vm.ladda || vm.goToSendPage()"></button>
+</div>
+<div class="border-form margin-top-30" ng-init="vm.init()">
+
+  <div class="confirmation-box margin-top-40">
+      <div class="elements width-100" ng-repeat="(key,value) in vm.transaction">
+        <label class="key capitalize"> {{ vm.remove_(key) }}  &nbsp; </label>
+        <label class="value ellipses"> {{ value }} </label>
+      </div>
+  </div>
+  <div class="margin-top-30 eos-form">
+    <div class="elements">
+      <label for="password"> Password </label>
+      <div class="input center-flex">
+        <input autocomplete="off" type="{{vm.typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" ng-model="vm.password" class="width-100" ng-change="vm.keyDownload()">
+        <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
+      </div>
+    </div>
+
+    <div class="elements">
+      <div class="error" ng-show="vm.error"> {{vm.error}} </div>
+    </div> 
+    <div class="elements flex-sapce-bw position-bottom margin-left-10" style="margin-top:20px;">
+      <button class="cancel_button margin-right-10 uppercase" ng-click="vm.ladda || vm.goToSendPage()" ><span ng-if="!vm.ladda"> BACK </span> <div ng-if="vm.ladda" class="indicator"> 
+        <svg width="16px" height="12px">
+          <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        </svg>
+      </div> 
+      </button>
+      <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-10 uppercase' :'submit_button margin-left-10 uppercase'">
+        <button class="width-100" ng-hide="vm.showTransfer"  ng-click="vm.ladda || vm.transfer()" ><span ng-if="!vm.ladda"> Confirm </span> <div ng-if="vm.ladda" class="indicator"> 
+            <svg width="16px" height="12px">
+              <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg>
+            </div> 
+          </button>
+          
+        <button class="width-100" ng-show="vm.showTransfer"  ng-click="vm.ladda || vm.sendNonTransferTransaction()" ><span ng-if="!vm.ladda"> Confirm </span> <div ng-if="vm.ladda" class="indicator"> 
+          <svg width="16px" height="12px">
+            <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          </svg>
+          </div> 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

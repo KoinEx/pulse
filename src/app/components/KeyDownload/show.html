@@ -1,0 +1,31 @@
+<div ng-init="vm.init()">
+  <div class="header">
+      <div class="top-logo" align="center">
+          <img src="/assets/images/logo-white.png" alt="" class="width-11">
+      </div>  
+      <div class="name uppercase">EOS Pulse</div>
+  </div>
+  <div class="notice margin-top-20">
+    <div class="title "> Please store your Private Key </div>
+    <div class="desc margin-top-10 width-80 margin-auto"> To recover or import your Account to another system you need to save your Private Key.  </div>
+  </div>
+  <div class="polygon-box-layout">
+    <div class="polygon-container">
+      <div class="identifier">01</div>
+      <div class="text">
+        <div class="title capitalize">Export Private Key </div>
+        <div class="desc"> Export your Private Key in CSV and save it for backup</div>
+      </div>
+    </div>
+    <div class="polygon-container margin-top-30">
+      <div class="identifier">02</div>
+      <div class="text">
+        <div class="title capitalize">Confirm Private Key </div>
+        <div class="desc">Paste your Private Key that you stored to continue further</div>
+      </div>
+    </div>
+  </div>
+  <div class="submit_button position-bottom">
+        <button ng-click="vm.goToKeyDownload('home')">Next</button>
+    </div>
+</div>

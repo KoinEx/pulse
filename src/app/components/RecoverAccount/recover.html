@@ -1,0 +1,103 @@
+<div class="header" ng-init="vm.init()">
+    <div class="top-logo" align="center">
+        <img src="/assets/images/logo-white.png" alt="" class="width-11">
+    </div>  
+    <div class="name uppercase">EOS Pulse </div>
+</div>
+<div class="home" ng-hide="vm.firstPage">
+    <button class="back-button" ng-click="vm.ladda || vm.goBack()"></button>
+    <div class="login-header">
+        <div class="title">Create Password</div>
+        <div class="desc margin-top-10 width-90 margin-auto"> {{ vm.warning }}</div>
+    </div>
+    <div class="progress-line margin-top-20 margin-bottom-40">
+        <div class="custom-hr-primary width-50"></div>
+        <div class="custom-hr-primary width-50"></div>
+    </div>
+    <form class="eos-form login-body">
+    <div class="elements">
+        <label >New Password </label>
+        <div class="input center-flex">
+            <input autocomplete="off" type="{{vm.typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" ng-model="vm.password"  ng-change="vm.verifyPassword()"  class="width-100">
+            <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
+        </div>
+    </div>
+    <div class="elements">
+        <label >Confirm Password</label>
+        <div class="input center-flex">
+            <input autocomplete="off" type="{{vm.typeCnPassword ? 'password' : 'text' }}" name="cnpassword" placeholder="Confirm Password" ng-model="vm.cnpassword"  class="width-100">
+            <i class="{{vm.typeCnPassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.toggleCnPassword()"></i>
+            </div>
+    </div>
+    <div class="elements">
+        <div class="title">Password Requirements</div>
+    </div>
+    <ul class="requirements">
+        <li ng-repeat= "(key,value) in vm.validations">
+        <input type="checkbox"  id="{{key}}" ng-model="vm.validations[key]">
+        <label>{{vm.validationText[key]}}</label>
+        </li>
+    </ul>
+    <div class="elements margin-top-10" ng-show='vm.error'>
+        <div class="error" > {{vm.error}} </div>
+    </div>
+    <div class="margin-top-40 submit_button margin-bottom-10">
+        <button ng-class="vm.ladda ? 'opacity-50 ' :''" ng-click="vm.ladda ||  vm.recoverAccount() " ><span ng-if="!vm.ladda"> Create Password</span> 
+            <div ng-if="vm.ladda" class="indicator"> 
+                <svg width="16px" height="12px">
+                    <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg>
+            </div> 
+        </button>
+    </div>
+</form>
+</div>
+<div class="home" ng-show="vm.firstPage">
+    <button class="back-button" ng-click="vm.goBack()"></button>
+    <div class="login-header">
+        <div class="title"> Recover EOS Account </div>
+        <div class="desc margin-top-10">Recover existing EOS account using your Private Key</div>
+    </div>
+    <div class="progress-line margin-top-20 margin-bottom-40">
+        <div class="custom-hr-primary width-50"></div>
+        <div class="custom-hr width-50"></div>
+    </div>
+    <form class="border-form login-body" >
+        <div class="elements">
+            <label> Select Network </label>
+            <div class="input">
+                <div class="dropdown pointer"  ng-click="vm.toggleDropdown()" style="width:97% !important;border-width:0;">
+                    <span style="vertical-align: -webkit-baseline-middle;">{{ vm.currentNetwork }}</span>
+                    <img src="/assets/images/arrow-black.png" alt="hjd" class="right width-4">
+                </div>
+                <div ng-class="vm.dropdown ? 'options animate-top-to-bottom width-100':'options animate-bottom-to-top width-100'" >
+                    <div class="option color-secondary-text"  ng-click="vm.changeNetwork(value)" ng-repeat="(key,value) in vm.networks">
+                    {{ value }}
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="elements">
+            <label > Account Name </label>
+            <input autocomplete="off" type="text" name="account_name" ng-model="vm.account_name" placeholder="Account Name">
+        </div>
+        <div class="elements">
+            <label >Private Key</label>
+            <input autocomplete="off"type="text" name="key" ng-model="vm.key" placeholder="Private Key">
+        </div>
+        <div class="elements" ng-show="vm.error">
+            <div class="error" > {{vm.error}} </div>
+        </div>
+        <div class="submit_button margin-top-10 margin-bottom-10">
+            <button ng-class="vm.ladda ? 'opacity-50' :''" ng-click="vm.ladda ||  vm.gotoSecondPage() " ><span ng-if="!vm.ladda"> Recover Account </span> 
+                <div ng-if="vm.ladda" class="indicator"> 
+                    <svg width="16px" height="12px">
+                        <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
+                </div> 
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,41 @@
+{
+  "name": "eoswallet",
+  "version": "0.0.2",
+  "description": "cold wallet for eos",
+  "main": "app.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "dependencies": {
+    "angular": "^1.5.11",
+    "angular-animate": "^1.4.7",
+    "angular-aria": "^1.4.7",
+    "angular-clipboard": "^1.6.2",
+    "angular-ladda": "^0.4.0",
+    "angular-qrcode": "^7.2.0",
+    "angular-sanitize": "^1.7.4",
+    "angular-ui-router": "^1.0.19 ",
+    "await-to-js": "^2.1.1",
+    "crypto-js": "^3.1.9-1",
+    "eosjs": "^16.0.6",
+    "fingerprintjs": "^0.5.3",
+    "ng-csv": "^0.3.6",
+    "ngletteravatar": "^4.0.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-minify": "^0.5.0",
+    "babel-plugin-angularjs-annotate": "^0.10.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.26.3",
+    "browserify": "^12.0.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "author": "Himanshu Singh <himanshu.singh@koinex.in>",
+  "license": "ISC"
+}

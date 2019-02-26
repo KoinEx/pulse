@@ -1,0 +1,62 @@
+<div class="top-header" title="Send">
+  <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+</div>
+<div class="border-form margin-top-30" ng-init="vm.init()">
+  <div class="elements">
+    <label for="receiver_name"> Recipient Account Name </label>
+    <div class="input center-flex">
+      <input autocomplete="off" type="text" name="receiver_name" ng-model="vm.transaction.to" placeholder="Account Name" ng-class="vm.reciepents.length ? '' : 'width-100'">
+      <div class="dropdown width-40 pointer" ng-if="vm.reciepents.length" ng-click="vm.toggleDropdownReceipent()">
+        <span style="vertical-align: -webkit-baseline-middle;">{{vm.reciepent || "Select Account"}}</span>
+        <img src="/assets/images/arrow-black.png" alt="hjd" class="right width-10">
+      </div>
+      <div ng-class="vm.dropdownReceipent ? 'options animate-top-to-bottom':'options animate-bottom-to-top'" >
+        <div class="option" ng-click="vm.selectReciepent('')">Select Account</div>
+          <div class="option"  ng-click="vm.selectReciepent(receipent)" ng-repeat="receipent in vm.reciepents">
+              {{ receipent }} 
+          </div> 
+      </div>
+    </div>
+  </div>
+
+  <div class="elements">
+    <label for="transfer_amount"> Amount </label>
+    <div class="input center-flex">
+        <input autocomplete="off" type="number" name="transfer_amount" ng-model="vm.transaction.amount" placeholder="0.0000" ng-blur="vm.decimalPrecision()" ng-class="vm.hasTokens() ? '' : 'width-100'">
+        <div class="dropdown width-40 pointer"  ng-click="vm.toggleDropdownToken()" ng-show="vm.hasTokens()">
+          <span style="vertical-align: -webkit-baseline-middle;">{{ vm.transaction.symbol }}</span>
+          <img src="/assets/images/arrow-black.png" alt="hjd" class="right width-10">
+        </div>
+        <div ng-class="vm.dropdownToken ? 'options animate-top-to-bottom':'options animate-bottom-to-top'" ng-show="vm.hasTokens()">
+            <div class="option"  ng-click="vm.selectToken(key)" ng-repeat="(key,value) in vm.availableTokens">
+                {{ key }}
+            </div> 
+        </div>
+      </div>
+  </div>
+  <div class="elements">
+    <label for="memo"> Memo ( Optional ) </label>
+    <textarea type="text" name="memo" ng-model="vm.transaction.memo" placeholder="Attach a memo for the reciever" rows="6"></textarea>
+  </div>
+  <div class="elements">
+    <div class="error" ng-show="vm.error"> {{vm.error}} </div>
+  </div> 
+  <div class="elements flex-sapce-bw position-bottom margin-left-10">
+    <button ng-class="vm.ladda ? 'cancel_button margin-right-10': 'cancel_button margin-right-10' " ng-click="vm.ladda || vm.gotoDashboard()" ><span ng-if="!vm.ladda">CANCEL</span> <div ng-if="vm.ladda" class="indicator"> 
+      <svg width="16px" height="12px">
+        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+      </svg>
+    </div> 
+    </button>
+    <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-10' :'submit_button margin-left-10'" >
+      <button class="width-100" ng-click="vm.ladda || vm.confirmTransaction()" ><span ng-if="!vm.ladda">SEND</span> <div ng-if="vm.ladda" class="indicator"> 
+          <svg width="16px" height="12px">
+            <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          </svg>
+          </div> 
+        </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+{
+  "name": "EOS Pulse",
+  "description": "Pulse is an open source browser extension for the EOS blockchain. It's a gateway to send, receive or stake EOS and custom tokens.",
+  "version": "0.1.2",
+  "permissions": [
+    "notifications",
+    "storage",
+    "webRequest",
+    "activeTab",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
+  "background":{
+    "persistent": true,
+    "scripts":[
+      "background.js"
+    ]
+  },
+  "content_scripts": [ {
+    "all_frames": true,
+    "js": [ "contentscript.js" ],
+    "matches": [ "file://*/*", "http://*/*", "https://*/*" ],
+    "run_at": "document_start"
+ } ],
+  "browser_action": {
+    "default_title": "EOS Pulse",
+    "default_popup": "index.html",
+    "default_icon":"assets/images/logo-48.png"
+  },
+  "web_accessible_resources": [
+    "assets/images/*.png",
+    "vendor.min.js"
+  ],
+  "icons": { 
+    "16": "assets/images/logo-16.png",
+    "48": "assets/images/logo-48.png",
+   "128": "assets/images/logo-128.png" 
+  },
+  "manifest_version": 2
+}

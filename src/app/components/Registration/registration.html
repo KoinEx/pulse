@@ -1,0 +1,129 @@
+<div ng-init="vm.init()">
+    <div class="header" ng-show="vm.onboarding">
+        <div class="top-logo" align="center">
+            <img src="/assets/images/logo-white.png" alt="" class="width-11">
+        </div>  
+        <div class="name uppercase">EOS Pulse </div>
+    </div>
+    <div class="top-header" title="{{vm.is_forgotAccount ? 'Import EOS Account' : 'Create Account'}}" ng-hide="vm.onboarding">
+        <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+    </div>
+    <div class="home" ng-if="vm.is_forgotAccount == false">
+        <button class="back-button" ng-click="vm.ladda || vm.goBack()" ng-show="vm.onboarding"></button>
+        <div class="login-header margin-top-10">
+          <div class="title" ng-show="vm.onboarding"> Create  Account Name </div>
+          <div class="desc margin-top-10 width-90 margin-auto font-12"> {{ vm.onboarding ? vm.warning : 'Create a unique account on ' }} {{ vm.onboarding ? '' : vm.currentNetwork}}</div>
+          <div class="text-center color-secondary-text uppercase font-12 bold margin-top-10" ng-show="vm.onboarding">or</div>
+          <div class="text-center pointer color-primary margin-top-10 font-14" ng-click="vm.getRecoverUi()" ng-show="vm.onboarding"> Import EOS Account </div>
+        </div>
+        <div class="progress-line margin-top-20 margin-bottom-20" ng-show="vm.onboarding">
+          <div class="custom-hr-primary width-50"></div>
+          <div class="custom-hr-primary width-50"></div>
+        </div>
+      <form ng-submit="vm.createAccount()" ng-class="vm.onboarding ? 'border-form login-body' : 'border-form login-body margin-top-20'">
+        <div class="elements">
+            <label> Network </label>
+            <div class="input">
+                <div class="dropdown pointer"  style="width:97% !important;border-width:0;">
+                    <span style="vertical-align: -webkit-baseline-middle;">{{ vm.currentNetwork }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="elements">
+            <label > Account Name </label>
+            <div class="new-title"> Only lower cased alphabets (a-z) and numbers (1-5) allowed</div>
+            <input autocomplete="off" type="text" name="password" maxlength="12" ng-model="vm.account_name" ng-change="vm.verifyAccountName()" placeholder="Account Name">
+        </div>
+        <div class="elements">
+            <div class="title capitalize">Account name Requirements</div>
+        </div>
+        <ul class="requirements">
+            <li ng-repeat= "(key,value) in vm.accountNameValidations">
+                <input type="checkbox"  id="{{key}}" ng-model="vm.accountNameValidations[key]">
+                <label>Exact 12 characters long</label>
+            </li>
+        </ul>
+
+        <div class="elements">
+            <label >Password</label>
+            <div class="title font-12 margin-top-10" style="opacity: 0.7;">Enter your Pulse password</div>
+            <div class="input center-flex">
+                <input autocomplete="off" type="{{vm.typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" ng-model="vm.password" class="width-100" placeholder="Private Key">
+                <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
+            </div>
+        </div>
+
+        <div class="elements marginm-top-20" ng-show='vm.error'>
+          <div class="error" > {{vm.error}} </div>
+        </div>
+        
+        <div class="margin-top-20 margin-bottom-10 submit_button">
+            <button ng-class="vm.ladda ? 'opacity-50' : '' " type="vm.ladda || submit" ><span ng-if="!vm.ladda">NEXT</span> 
+                <div ng-if="vm.ladda" class="indicator"> 
+                    <svg width="16px" height="12px">
+                        <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
+                </div> 
+            </button>
+        </div>
+      </form>
+    </div>
+    <div class="home" ng-if="vm.is_forgotAccount">
+        <button class="back-button" ng-click="vm.goBack()" ng-show="vm.onboarding && !vm.onboardingRecover"></button>
+        <div class="login-header margin-top-10">
+            <div class="title"> {{ vm.onboardingRecover ? 'Confirm Private Key' : '' }} </div>
+            <div class="title"> {{ (vm.onboarding && !vm.onboardingRecover) ? 'Import EOS Account' : '' }} </div>
+            <div class="desc margin-top-10"> {{ vm.onboardingRecover ? 'Please type or paste your Private Key to confirm the Private Key' : 'Import your existing EOS account by using your Private Key' }} </div>
+        </div>
+        <div class="progress-line margin-top-20 margin-bottom-20" ng-show="vm.onboardingRecover">
+            <div class="custom-hr width-50"></div>
+            <div class="custom-hr width-50"></div>
+        </div>
+        <form ng-submit="vm.recoverAccount()" ng-class="vm.onboarding ? 'border-form login-body' : 'border-form login-body margin-top-20'" ng-if="vm.is_forgotAccount" >
+            <div class="elements" ng-hide="vm.onboardingRecover">
+                <label> {{ vm.onboarding ? 'Select' : '' }} Network </label>
+                <div class="input">
+                    <div class="dropdown pointer"  ng-click="vm.onboarding == false || vm.toggleDropdown()" style="width:97% !important; border-width:0;">
+                        <span style="vertical-align: -webkit-baseline-middle;">{{ vm.currentNetwork }}</span>
+                        <img src="/assets/images/arrow-black.png" alt="hjd" class="right width-4" ng-show="vm.onboarding">
+                    </div>
+                    <div ng-show="vm.onboarding" ng-class="vm.dropdown ? 'options animate-top-to-bottom width-100':'options animate-bottom-to-top width-100'" >
+                        <div class="option color-secondary-text"  ng-click="vm.changeNetwork(value)" ng-repeat="(key,value) in vm.networks">
+                        {{ value }}
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="elements" ng-hide="vm.onboardingRecover">
+                <label > Account Name </label>
+                <input autocomplete="off" type="text" name="account_name" ng-model="vm.account_name" ng-click="vm.verifyAccountName()">
+            </div>
+            <div class="elements">
+                <label >Private Key</label>
+                <input autocomplete="off"type="text" name="key" ng-model="vm.key">
+            </div>
+            <div class="elements" ng-hide="vm.onboardingRecover">
+                <label > Password </label>
+                <div class="title font-12 margin-top-10" style="opacity: 0.7;">Enter your Pulse password</div>
+                <div class="input center-flex">
+                    <input autocomplete="off" type="{{vm.typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" ng-model="vm.password" class="width-100" ng-change="vm.keyDownload()">
+                    <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
+                </div>
+            </div>
+            <div class="elements" ng-show="vm.error">
+                <div class="error" > {{vm.error}} </div>
+            </div>
+            <div ng-class="vm.onboardingRecover ? 'position-bottom submit_button' : 'submit_button margin-top-10 margin-bottom-10'">
+                <button ng-class="vm.ladda ? 'opacity-50' :''" type="vm.ladda || submit" ><span ng-if="!vm.ladda"> {{ vm.onboardingRecover ? 'CONFIRM' : 'IMPORT' }} </span> 
+                    <div ng-if="vm.ladda" class="indicator"> 
+                        <svg width="16px" height="12px">
+                            <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                            <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        </svg>
+                    </div> 
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

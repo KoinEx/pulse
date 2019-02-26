@@ -1,0 +1,26 @@
+<div ng-init="vm.init()">
+    <div class="header">
+        <div class="top-logo" align="center">
+            <img src="/assets/images/logo-white.png" alt="" class="width-11">
+        </div>  
+        <div class="name uppercase">EOS Pulse</div>
+    </div>
+    <div class="notice margin-top-20">
+      <div class="title capitalize "> Privacy Note</div>
+      <div class="section margin-top-20" >
+        <div class="text">
+            EOS Pulse is beta software. <br>
+            When you log in to EOS Pulse and approve account access, your current account's address is visible to the site you're currently viewing. This can be used to look up your account balances of EOS and other tokens.
+            For your privacy, take caution when approving account access and sign out of EOS Pulse when you're done using a site.
+        </div>
+      </div>
+      <div class="three-dots">
+        <div class="dot" ui-sref="termsAndConditions()"> </div>
+        <div class="filled dot" ui-sref="privacyPolicy()"></div>
+        <div class="dot" ui-sref="phishingPolicy()"></div>
+      </div>
+    </div>
+    <div class="submit_button position-bottom">
+          <button ng-click="vm.gotoHomePage('phishingPolicy')">Accept</button>
+      </div>
+  </div>

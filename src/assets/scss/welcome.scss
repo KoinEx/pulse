@@ -1,0 +1,30 @@
+.welcome{
+  position: absolute;
+  top: 13.83%;
+  padding: 0 8.53%;
+  .box-layout{
+    position: relative;
+    font-family: $Lato !important;
+    .logo{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .name{
+      margin-top: 2.55%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 48px;
+    }
+    .desc{
+      font-size: 14px;
+      line-height: 27px;
+      text-align: center;
+    }
+
+  }
+}
+

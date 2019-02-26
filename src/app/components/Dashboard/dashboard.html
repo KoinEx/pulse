@@ -1,0 +1,203 @@
+<div class="dashboard" ng-init="vm.init()">
+  <div class="account-header">
+
+    <div class="hamburger">
+      <button ng-click="vm.toggleMenu()" class="width-50"></button>
+    </div>
+    <div class="dropdown pointer" ng-click="vm.toggleDropdown()">
+        <img src="/assets/images/green-circle.png" alt="hdj" class="margin-right-20">
+        <div name="account" id="" class="pointer select">{{vm.currentNetwork}}</div>
+        <img src="/assets/images/down-arrow.png" alt="hjd" class="margin-left-20">
+    </div>
+    <div ng-class="vm.dropdown ? 'options animate-top-to-bottom':'options animate-bottom-to-top'" >
+      <div class="option" ng-click="vm.changeNetwork(value)" ng-repeat="(key,value) in vm.networks">
+          <img src="/assets/images/plan-circle.png" alt="" class="margin-right-20" >
+          {{ value }} 
+      </div> 
+    </div>
+    <label class="switch privacy-tooltip" tooltip-text="Private Mode {{vm.privacyMode ? 'On' : 'Off' }}" style="left:60px;">
+      <input type="checkbox"  ng-model="vm.privacyMode" ng-change="vm.togglePrivacy()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <div class="account-body" ng-if="vm.selected">
+
+    <div class="color-secondary-text text-center">
+        {{ vm.accountName }}
+    </div>
+    <div class="balance" ng-if="vm.selected">
+        {{vm.balance}} EOS 
+    </div>
+    <div class="fiat margin-top-10">
+      <div class="value">{{ vm.fiatValue }}</div>
+      <div class="currency pointer" ng-click="vm.showCurrency()">{{ vm.defaultCurrency }}</div>
+      <div ng-class="vm.showCurrencyOption ? 'options animate-top-to-bottom':'options animate-bottom-to-top'" >
+        <div class="option" ng-click="vm.updateDefaultCurency(currency)" ng-repeat="currency in vm.defaultCurrencies" ng-if="currency != vm.defaultCurrency"> {{currency}} </div>
+      </div>
+    </div>
+
+    <div class="action-buttons margin-top-10">
+        <label class="capitalize color-gray">CPU used : &nbsp;</label>
+        <label class="font-12 color-primary">{{ (vm.cpuInfo.used * 1)/1000 || '0' }} ms / {{ (vm.cpuInfo.max * 1 )/1000 || '0' }} ms </label>
+        <img src="/assets/images/edit.png" alt="" class="width-4 pointer margin-left-10" ng-click="vm.gotoState('cpuInfo')">
+    </div>
+
+    <div class="action-buttons margin-top-30">
+      <button ng-click="!vm.selected || vm.gotoState('receiveToken')" ng-class="vm.selected ? 'capitalize margin-right-20' : 'disabled_button capitalize margin-right-20' "> receive </button>
+      <button ng-click="!vm.selected || vm.gotoState('sendToken')" ng-class="vm.selected ? 'capitalize' : 'disabled_button capitalize' "> Send </button>
+    </div>
+
+    <div class="option-tabs margin-top-20">
+      <div class="selection-buttons">
+        <button ng-class="vm.selectedTab == 0 ? 'selected selection-button color-gray bold right text-left' : 'selection-button color-gray bold right text-left' " ng-click="vm.showTokens()"> Tokens Available </button>
+        <button ng-class="vm.selectedTab == 1 ? 'selected selection-button color-gray bold text-right' : 'selection-button color-gray bold text-right' " ng-click="vm.showTxnHistory()"> Transaction History </button>
+      </div>
+      <div class="selected-tab-data">
+
+        <div class="row pointer" ng-repeat="(key, value) in vm.selectedTabData" ng-if="vm.selectedTab == 0 && !vm.loader" style="height:40px;">
+          <label  class="textMiddle bold pointer"> {{key}}</label>
+          <ng-letter-avatar class="avatar pointer" data='{{key}}' fontSize="10px" auto-color="true" width="30px" height="30px" dynamic="true" shape="round"></ng-letter-avatar>
+          <label  class="right asset-value pointer" >{{value}} {{key}} </label>
+          <label  class="right color-gray width-80 pointer" > {{vm.conversionController[key] ? vm.math.floor(value * vm.conversionController[key][vm.defaultCurrency] * 10000)/10000  : '--' }} {{vm.conversionController[key] ? vm.defaultCurrency :''}} </label>
+        </div>
+
+        <div class="row pointer" ng-repeat="transaction in vm.selectedTabData" ng-if="vm.selectedTab == 1" ng-click="vm.gotoUrl(transaction.id)">
+          <div >
+              <label  class="textMiddle bold pointer width-100"> <span> {{(transaction.data.quantity.split(' ')[1]) || 'eos' | uppercase}} </span> <span class="capitalize"> &nbsp; &nbsp; {{transaction.action}}</span> <span class="{{transaction.status}} capitalize right">  {{ transaction.status }} </span></label>
+              <ng-letter-avatar class="avatar pointer" data='{{transaction.status}}' fontSize="10px" auto-color="true" width="30px" height="30px" dynamic="true" shape="round"></ng-letter-avatar>
+              <label  class="right asset-value pointer" style="width:80%;" ng-if="transaction.data.quantity || transaction.action == 'transfer' "> {{ transaction.data.quantity }} </label>
+              <label  class="right asset-value pointer" style="width:80%;" ng-if="transaction.action == 'delegatebw' ||  transaction.action == 'undelegatebw'"> {{ (vm.parseFloat(transaction.data.unstake_cpu_quantity || transaction.data.stake_cpu_quantity) * 1) + (vm.parseFloat(transaction.data.unstake_net_quantity || transaction.data.stake_net_quantity) * 1) }} EOS</label>
+              <label  class="right color-gray flex-sapce-bw width-100 pointer"> <span> #{{$index + 1}} {{transaction.submitted_at |date:'dd.MM.yyyy, hh:mm a' }} </span> <span > {{vm.conversionController[transaction.data.quantity.split(' ')[1]] ? vm.math.floor(transaction.data.quantity.split(' ')[0] * vm.conversionController[transaction.data.quantity.split(' ')[1]][vm.defaultCurrency] * 10000)/10000  : '--' }} {{vm.conversionController[transaction.data.quantity.split(' ')[1]] ? vm.defaultCurrency :''}} </span> </label>
+              <label  ng-class="transaction.id ?'right color-gray flex-sapce-bw width-100 pointer tooltip-txn': 'right color-gray flex-sapce-bw width-100 pointer' " tooltip-text="{{vm.copyText}}" tooltip-top="10px" tooltip-left="15px" clipboard text="transaction.id" on-copied="vm.success()" on-error="vm.fail(err)"  style="margin-top: 5px;border-top: 1px solid #bebebe40;padding-top: 5px;"> <span > Transaction ID : {{transaction.id.substring(0,30)}} ....   </span> </label>
+          </div>
+          <!-- <div ng-if="$index > 3"> 
+            <a ui-sref="showTransactionHistory()" class="center-flex margin-top-20"> show more</a>
+          </div> -->
+        </div>
+        <div class="text-center color-gray background-dahboard" style="font-size:15px;padding:40px 0;" ng-if="vm.checkIfNoData() && !vm.loader">No data to show  </div>
+        <div class="text-center color-gray background-dahboard" style="font-size:15px;padding:40px 0;" ng-if="vm.loader && vm.selectedTab == 0">
+          <div class="indicator"> 
+            <svg width="16px" height="12px">
+              <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg>
+          </div>   
+      </div>
+      </div>
+    </div>
+  </div>
+  <div ng-hide="vm.selected">
+    <div class="notice margin-top-20">
+      <div class="title width-80 margin-auto"> {{ (vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet') ? 'Create New Account' : 'Import EOS Account'}} </div>
+      <div class="desc margin-top-10" ng-if="vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet'">  Create a unique account on  {{vm.currentNetwork}}  </div>
+      <div class="desc margin-top-10" ng-if="vm.currentNetwork != 'mainnet' && vm.currentNetwork != 'testnet'">  Import any EOS account created on your  {{vm.currentNetwork}}  </div>
+    </div>
+    <div class="polygon-box-layout margin-top-50">
+      <div class="polygon-container">
+        <div class="identifier">01</div>
+        <div class="text" ng-if="vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet'">
+          <div class="title capitalize">{{ vm.currentNetwork == 'mainnet' ? 'Pay Network fee' : 'Create Account Name' }} </div>
+          <div class="desc" ng-if="vm.currentNetwork == 'mainnet'"> You need to send {{vm.fees}} for staking on EOS mainnet as per the EOS blockchain requirements.</div>
+          <div class="desc" ng-if="vm.currentNetwork == 'testnet'"> Enter your details for a new EOS Account.</div>
+        </div>
+        <div class="text" ng-if="vm.currentNetwork != 'mainnet' && vm.currentNetwork != 'testnet'">
+          <div class="title capitalize">Account Name </div>
+          <div class="desc"> You will be required to enter account name for the account you created on {{vm.currentNetwork}}.</div>
+        </div>
+      </div>
+      <div class="polygon-container margin-top-30">
+        <div class="identifier">02</div>
+        <div class="text" ng-if="vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet'">
+          <div class="title capitalize"> {{ vm.currentNetwork == 'mainnet' ? 'Create Account Name' : 'Enter Pulse Password' }} </div>
+          <div class="desc">{{ vm.currentNetwork == 'mainnet' ? 'Enter your details for a new EOS Account' : 'Enter your Pulse password to create your account' }} </div>
+        </div>
+        <div class="text" ng-if="vm.currentNetwork != 'mainnet' && vm.currentNetwork != 'testnet'">
+          <div class="title capitalize"> Private Key </div>
+          <div class="desc">Next you would have to enter the Private Key for the account you are importing.</div>
+        </div>
+      </div>
+    </div>
+    <div class="submit_button" style="margin-top:160px;">
+      <button ng-click="vm.createNewAccount()" ng-show="vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet'">CREATE NEW ACCOUNT</button>
+      <button ng-show="vm.currentNetwork != 'mainnet' && vm.currentNetwork != 'testnet'" ng-click="vm.importEOSAccount()">NEXT</button>
+    </div>
+    <div ng-show="vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet'" class="color-primary font-14 center-flex margin-top-10 pointer" ng-click="vm.importEOSAccount()">Import EOS Account</div>
+  </div>
+  <div class="settings-container" ng-if="vm.menuOpened"></div>
+  <div ng-class="vm.menuOpened? 'menu-modal left-to-right': 'menu-modal right-to-left'">
+    <div class="close-menu flex-sapce-bw">
+        <img src="/assets/images/dahboard-logo.png" alt="logo" class="width-40 margin-left-70">
+        <button ng-click="vm.toggleMenu()" >
+            <img src="/assets/images/settings-close.png" alt="" class="width-30">
+        </button>
+    </div>
+    <div class="sideMenu margin-top-20">
+      <div class="width-100 justify-start center-flex">
+          <ng-letter-avatar class="circle" data='{{vm.selected}}' auto-color="true" width="50px" height="50px" dynamic="true" shape="round"></ng-letter-avatar>
+          <select ng-model="vm.selected" ng-change="vm.selectedAccount()" ng-if="vm.selected">
+            <option value="{{account}}_{{vm.currentNetwork}}" ng-repeat="account in vm.accounts"> {{account}} </option>
+          </select>
+      </div>
+  
+      <hr class="width-100 margin-top-20 custom-hr">
+      <div class="actions">
+        <ul class="action" ng-click="vm.exportKey()" ng-if="vm.selected">
+          <li>
+            <img src="/assets/images/export.png" alt="" class="icon">
+            <div class="value">Export Private Key</div>
+          </li>
+        </ul>
+        <ul class="action" ng-click="vm.createAccount()" ng-show="vm.currentNetwork == 'mainnet' || vm.currentNetwork == 'testnet'">
+          <li >
+            <img src="/assets/images/new.png" alt="" class="icon">
+            <div class="value">Create Account</div>
+          </li>
+        </ul>
+        <ul class="action" ng-click="vm.importAccount()">
+          <li >
+            <img src="/assets/images/import.png" alt="" class="icon">
+            <div class="value">Import Account</div>
+          </li>
+        </ul>
+        <ul class="action" ng-click="vm.goToNextState('cpuInfo')" ng-if="vm.selected">
+          <li >
+            <img src="/assets/images/cpu.png" alt="" class="icon">
+            <div class="value">Delegate CPU</div>
+          </li>
+        </ul>
+        <ul class="action" ng-click="vm.goToNextState('customToken')" ng-if="vm.selected">
+          <li >
+            <img src="/assets/images/add-token.png" alt="" class="icon">
+            <div class="value">Add Custom Token</div>
+          </li>
+        </ul>
+        <ul class="action" ng-click="vm.goToNextState('customNetwork')">
+          <li >
+            <img src="/assets/images/add-network.png" alt="" class="icon">
+            <div class="value">Add Network</div>
+          </li>
+        </ul>
+        <ul ng-if="vm.selected" class="action" ui-sref="privacyMode()">
+            <li>
+              <img src="/assets/images/privacy_mode.png" alt="privacy_mode" class="icon">
+              <div class="value">
+                Private Mode
+              </div>
+            </li>
+          </ul>
+          <ul class="action">
+              <li ng-click="vm.goToNextState('infoAndHelp')" >
+                <img src="/assets/images/info.png" alt="info" class="icon">
+                <div class="value">Info & Help</div>
+              </li>
+            </ul>
+      </div>
+      <div class="logout pointer" ui-sref="home()" ng-if="vm.selected">
+        <img src="/assets/images/logout.png" alt="" class="icon">
+        <div class="value">Logout</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div> 

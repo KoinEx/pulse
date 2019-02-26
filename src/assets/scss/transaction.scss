@@ -1,0 +1,93 @@
+.transaction-history{
+  .balance{
+    color: $primary;
+    width: 100%;
+    text-align: center;
+  }
+  .close-button{
+    background-image: url('/assets/images/menu-close.png');
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position-x: right;
+    background-position-y: center;
+    width: 10%;
+    float: right;
+    height: 15px;
+    margin-right: 30px;
+    margin-top: -20px;
+    cursor: pointer;
+  }
+  .title{
+    font-weight: bold;
+    color: #a2a1a1;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+  }
+  .tabs{
+    width: 90%;
+    margin:0 auto;
+    background-color: rgba($color: #BEBEBE, $alpha: 0.06);
+    .tab{
+      padding: 20px 0;
+      width: 31.3%;
+      font-size: 13px;
+      background-color: rgba($color: #BEBEBE, $alpha: 0.06);
+      float: left;
+      cursor: pointer;
+      color: $gray;
+    }
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius:10px ;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $gray; 
+        border-radius: 10px;
+    }
+
+    .tab-data{
+      max-height: 500px;
+      overflow-x: hidden;
+      width: 100%;
+      .row{
+          background-color: rgba($color: #BEBEBE, $alpha: 0.06);;
+          height: 77px;
+          padding: 10px 15px;
+          border-bottom: 1px solid #eee;
+          font-family: $Lato;
+          &:hover{
+            background-color: $row-hover;
+          }
+        }
+    }
+    .submitted-background{
+      background-color: #FEFAF4 !important;
+    }
+    .submitted-text{
+      color: $warn;
+    }
+
+    .failed-background{
+      background-color: #FFF6F6 !important;
+    }
+    .failed-text{
+      color: $failed;
+    }
+
+    .confirmed-background{
+      background-color: #F6FDEE !important;
+    }
+
+    .confirmed-text{
+      color: $confirmed;
+    }
+  }
+  
+}
