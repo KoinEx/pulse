@@ -37,5 +37,5 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "author": "Himanshu Singh <himanshu.singh@koinex.in>",
-  "license": "ISC"
+  "license": "MIT"
 }
