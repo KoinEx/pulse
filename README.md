@@ -5,7 +5,7 @@ Pulse can be used to transact all EOS based tokens. One can send, receive or sta
 
 ## Dapp Developers
 
-Following API are exposed for Dapp Development :
+Following API are exposed for Dapp Development  :
 
 ```js
 pulse object can be accessed from every js enabled website under window object.
