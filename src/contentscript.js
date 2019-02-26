@@ -1,6 +1,6 @@
 import {External_Channels } from './app/constants/enums';
 
-// all the events emited here get catch on websites
+// all the events emitted here get catch on websites
 
 const getData = () => {
   var port = chrome.runtime.connect({name:External_Channels.GETDATA});
@@ -31,7 +31,7 @@ const sendCustomAction = (customAction)=>{
 }
 
 
-// event listners for events emitted from any js website
+// event listeners for events emitted from any js website
 
 window.addEventListener(External_Channels.SEND_CUSTOM_ACTION,sendCustomAction);
 window.addEventListener(External_Channels.GETDATA,getData);
@@ -39,7 +39,7 @@ window.addEventListener(External_Channels.CONNECT,connect);
 window.addEventListener(External_Channels.SEND,sendTransaction);
 
 
-// dispach events after getting response form the bg script
+// dispach events after getting response from the bg script
 chrome.runtime.onConnect.addListener((port)=>{
   port.onMessage.addListener((response)=>{
     port.disconnect();

@@ -34,6 +34,6 @@ const config = {
     mainnet
 };
 
-// config fot eos default networks we are providing 
+// config for eos default networks we are providing 
 
 module.exports = {config};

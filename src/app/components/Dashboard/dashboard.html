@@ -71,9 +71,6 @@
               <label  class="right color-gray flex-sapce-bw width-100 pointer"> <span> #{{$index + 1}} {{transaction.submitted_at |date:'dd.MM.yyyy, hh:mm a' }} </span> <span > {{vm.conversionController[transaction.data.quantity.split(' ')[1]] ? vm.math.floor(transaction.data.quantity.split(' ')[0] * vm.conversionController[transaction.data.quantity.split(' ')[1]][vm.defaultCurrency] * 10000)/10000  : '--' }} {{vm.conversionController[transaction.data.quantity.split(' ')[1]] ? vm.defaultCurrency :''}} </span> </label>
               <label  ng-class="transaction.id ?'right color-gray flex-sapce-bw width-100 pointer tooltip-txn': 'right color-gray flex-sapce-bw width-100 pointer' " tooltip-text="{{vm.copyText}}" tooltip-top="10px" tooltip-left="15px" clipboard text="transaction.id" on-copied="vm.success()" on-error="vm.fail(err)"  style="margin-top: 5px;border-top: 1px solid #bebebe40;padding-top: 5px;"> <span > Transaction ID : {{transaction.id.substring(0,30)}} ....   </span> </label>
           </div>
-          <!-- <div ng-if="$index > 3"> 
-            <a ui-sref="showTransactionHistory()" class="center-flex margin-top-20"> show more</a>
-          </div> -->
         </div>
         <div class="text-center color-gray background-dahboard" style="font-size:15px;padding:40px 0;" ng-if="vm.checkIfNoData() && !vm.loader">No data to show  </div>
         <div class="text-center color-gray background-dahboard" style="font-size:15px;padding:40px 0;" ng-if="vm.loader && vm.selectedTab == 0">

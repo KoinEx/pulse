@@ -1,4 +1,4 @@
-import to from 'await-to-js';
+// import to from 'await-to-js';
 import {config} from '../config/config';
 import Eos from 'eosjs';
 

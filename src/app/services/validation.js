@@ -80,7 +80,7 @@ export default class ValidationService {
     }
   }
 
-  async validatePartialDelicateTxn(transaction){ // to validate delegate/undelegate cpu transaction without password 
+  async validatePartialDelicateTxn(transaction){ // to validate delegate/undelegate CPU transaction without password 
     await this.init();
     if( transaction && transaction.symbol &&  transaction.receiver && parseFloat(transaction.net_quantity) > 0 && parseFloat(transaction.CPU_quantity) > 0 && ( transaction.type == "undelegate" || ( ( transaction.type == 'delegate' && parseFloat(transaction.CPU_quantity) + parseFloat(transaction.net_quantity)) <= parseFloat(this.availableTokens[transaction.symbol] || 0))) ) {
       console.log('ho gya pass');  

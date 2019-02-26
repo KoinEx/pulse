@@ -166,7 +166,7 @@ export default class AccountController {
   
   // To recover user account and add data to chrome storage.
 
-  async recoverAccount(){ //
+  async recoverAccount(){ 
     this.ladda=true;
     this.error='';
 
@@ -192,7 +192,9 @@ export default class AccountController {
       if(userdata && userdata.permissions[0] && userdata.permissions[0].required_auth.keys[0].key === active){
         if(!this.onboardingRecover) {
           this.key = await this.encryptionService.encrypt(this.password,this.key);
-          await this.store.save({account_name:userdata.account_name,balance:userdata.core_liquid_balance ? `${userdata.core_liquid_balance.split(' ')[0]}` : 0,resources:userdata.total_resources,keyManager:this.key});
+          await this.store.save({
+            account_name:userdata.account_name,balance:userdata.core_liquid_balance ? `${userdata.core_liquid_balance.split(' ')[0]}` : 0,resources:userdata.total_resources,keyManager:this.key
+          });
         }
         await this.syncBalance();
         this.ladda=false;
@@ -218,7 +220,7 @@ export default class AccountController {
     this.resetError();
   }
 
-  // To show account recover Ui
+  // To show recover account UI
   getRecoverUi(){
     this.is_forgotAccount = !this.is_forgotAccount;
     this.store.set({is_forgotAccount:this.is_forgotAccount});
