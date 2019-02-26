@@ -45,7 +45,7 @@ options = {param1:"value", ... } // params for contract action
  if (pulse){
   // extension installed
  
-  const network = pusle.network;
+  const network = pulse.network;
   if (network != "mainnet"){  
    // user is not on mainnet ask to switch if required
    // do pulse.init() to get the pulse object updated without and re-assign the network = pusle.network; 
