@@ -1,0 +1,49 @@
+<div class="top-header" title="Connection Request">
+  <button class="right" ng-click="vm.ladda || vm.block()"></button>
+</div>
+<div class="communication">
+  <div class="colored-strip"></div>
+  <div class="header">
+    <div class="title">Connection Request</div>
+  </div>
+  <div class="body">
+    <div class="text-box">
+        {{vm.protocol}}//{{vm.host}}/
+    </div>
+    <div class="pairing">
+      <div class="dots">
+        <img src="/assets/images/plan-circle.png" alt="">
+        <img src="/assets/images/plan-circle.png" alt="">
+        <img src="/assets/images/green-circle.png" alt="">
+        <img src="/assets/images/plan-circle.png" alt="">
+        <img src="/assets/images/plan-circle.png" alt="">
+      </div>
+    </div>
+    <div class="text-box"> {{ vm.accountName  }} </div>
+    <div class="host-info">{{vm.protocol}}//{{vm.host}}</div>
+    <div class="warning">
+      <label>
+          This site is requesting access to view your current account address. Please make sure the site you grant access to is trustable.
+      </label> <br>
+      <a ng-href="https://github.com/koinEX/pulse" target="_blank">Learn more</a>
+    </div>
+    <div class="elements flex-sapce-bw margin-top-20 margin-bottom-10" >
+        <button class="cancel_button margin-right-10 uppercase" ng-click="vm.ladda || vm.block()" ><span ng-if="!vm.ladda"> Reject </span> <div ng-if="vm.ladda" class="indicator"> 
+          <svg width="16px" height="12px">
+            <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          </svg>
+        </div> 
+        </button>
+        <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-10 uppercase' :'submit_button margin-left-10 uppercase'">
+            <button class="width-100"  ng-click="vm.ladda || vm.allow()" ><span ng-if="!vm.ladda"> Connect </span> <div ng-if="vm.ladda" class="indicator"> 
+              <svg width="16px" height="12px">
+                <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              </svg>
+              </div> 
+            </button>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="top-header" title="Private Mode">
+  <button class="right" ui-sref="dashboard()"></button>
+</div>
+
+<div class="notice margin-top-20 width-90 margin-auto" ng-init="vm.init()">
+  <div class="text-left title" >What is Private Mode?</div>
+  <div class="text-left desc margin-top-20"> Enabling Private Mode denies access to your data on EOS Pulse for all external parties. Integration with dApps is not allowed when Private Mode is enabled</div>
+  <div class="margin-top-30"> 
+    <span>
+      Enable Private Mode
+    </span> 
+    <label class="switch" style="margin-left: 150px;">
+      <input type="checkbox"  ng-model="vm.privacyMode" ng-change="vm.togglePrivacy()">
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+

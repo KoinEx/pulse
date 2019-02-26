@@ -1,0 +1,65 @@
+<div class="top-header" title="Confirm Contract Transaction">
+  <button class="right" ng-click="vm.ladda || vm.rejectRequest()"></button>
+</div>
+<div class="communication" ng-init="vm.init()">
+  <div class="network">
+    <img src="/assets/images/green-circle.png" alt="" style="width:3%;">
+    <label class="margin-left-10"> {{ vm.currentNetwork }} </label>
+  </div>
+</div>
+<div class="border-form">
+    <div class="confirmation-box width-100" style="box-shadow: none;padding: 0;">
+        <div class="elements center-flex color-primary font-12">
+            {{vm.protocol}}//{{vm.host}}/
+        </div>
+
+        <div class="elements center-flex color-secondary-text font-12">
+            Wants you to sign this transaction
+        </div>
+        <div class="elements connection-background width-100 flex-sapce-bw" >
+          <label class="bold"> Contract : &nbsp;</label>
+          <label class="color-secondary-text ">  {{ vm.transaction.contract }} </label>
+      </div>
+      <div class="elements connection-background width-100 flex-sapce-bw">
+          <label class="bold"> Action : &nbsp;</label>
+          <label class="color-secondary-text ">  {{ vm.transaction.action }} </label>
+      </div>
+        <div class="elements width-100 margin-top-10" ng-repeat="(key,value) in vm.transaction.data">
+            <label class="key capitalize"> {{ vm.remove_(key) }}  &nbsp; </label>
+            <label class="value"> {{ value }} </label>
+        </div>
+        <div class="progress-line margin-top-20 margin-bottom-40 margin-auto width-90">
+            <div class="custom-hr width-50" style="height: 1px;"></div>
+            <div class="custom-hr width-50" style="height: 1px;"></div>
+        </div>
+
+        <div class="elements center-flex-column align-start">
+          <label for="password"> Password </label> <br>
+          <div class="input center-flex">
+            <input autocomplete="off" type="{{vm.typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" ng-model="vm.password" class="width-100" ng-change="vm.keyDownload()">
+            <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
+          </div>
+        </div>
+    </div>
+    <div class="elements width-100" ng-show="vm.error">
+        <div class="error"> {{vm.error}} </div>
+      </div> 
+      <div class="elements flex-sapce-bw margin-top-10 margin-bottom-10" >
+          <button class="cancel_button margin-right-10 uppercase" ng-click="vm.ladda || vm.rejectRequest('SEND_CUSTOM_ACTION')" ><span ng-if="!vm.ladda">cancel</span> <div ng-if="vm.ladda" class="indicator"> 
+            <svg width="16px" height="12px">
+              <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg>
+          </div> 
+          </button>
+        <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-10 uppercase' :'submit_button margin-left-10 uppercase'">
+            <button class="width-100"  ng-click="vm.ladda || vm.submitCustomAction()" ><span ng-if="!vm.ladda"> Confirm </span> <div ng-if="vm.ladda" class="indicator"> 
+              <svg width="16px" height="12px">
+                <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              </svg>
+              </div> 
+            </button>
+          </div>
+      </div>
+  </div>

@@ -1,0 +1,511 @@
+.dashboard{
+  width: 375px;
+  height: 600px;
+  .account-header{
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius:10px ;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $gray; 
+        border-radius: 10px;
+    }
+
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.12), 0 0px 3px 0 rgba(225,225,225,0.14);
+    width: 100%;
+    padding-bottom: 10px;
+    .settings{
+      text-align: center;
+      width: 10%;
+      button{
+        background: url('/assets/images/settings.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: none;
+        border-radius: 0;
+        height: 20px;
+        outline: none;
+      }
+    }
+    .hamburger{
+      text-align: center;
+      width: 10%;
+      button{
+        background: url('/assets/images/hamburger-icon.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: none;
+        border-radius: 0;
+        height: 15px;
+        outline: none;
+      }
+    }
+    .dropdown{
+      margin-left: 70px;
+      margin-top:10px;
+      border: 1px solid rgba($slightly-black,0.2);
+      border-radius: 4px;
+      padding: 10px 0;
+      width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img{
+        width: 5%;
+      }
+      .select{
+        all: unset;
+        border: none;
+        user-select: none;
+       -webkit-appearance: none;
+        outline: none;
+        font-size: 14px;
+        color: $primary;
+        font-family: $Lato;
+      }
+    }
+    .options {
+      width: 140px;
+      border-radius: 2px 5px 5px 2px;
+      background-color: $white;
+      position: absolute;
+      left: 108px;
+      top: 49px;
+      overflow: scroll;
+      z-index: 1;
+
+      .option{
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: $primary;
+        height: 40px;
+        padding: 5px 8px;
+        cursor: pointer;
+        img{
+          width: 5%;
+        }
+        &:hover{
+          background-color: #F6F7F9;
+        }
+      }
+    }
+    .privacy-tooltip{
+      cursor: pointer;
+      position: relative;
+      &::before,&::after{
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition-duration: 1s;
+        content: " ";
+        font-size: 16px;
+      }
+      &:hover{
+        &::before,&::after{
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+      &::before{
+        content: attr(tooltip-text);
+        color: $white;
+        font-family: $Lato;
+        top: 25px;
+        right:-30px;
+        text-align: center;
+        width: max-content;
+        border-radius: 4px;
+        padding: 5px;
+        font-size: 12px;
+        background-color: rgba($black, 0.74);
+        z-index: 2;
+      }
+      &::after{
+        top: 15px;
+        left: 5px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 10px solid rgba($black,0.74);
+        z-index: 3;
+      }
+    }
+  }
+  .account-body{
+    display: block;
+    margin-top: 15px;
+    .logo{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fiat{
+
+      width: max-content;
+      min-width: 80px;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+      border: 1px solid rgba($slightly-black,0.2);
+      font-size: 14px;
+      letter-spacing: -0.5px;
+      line-height: 17px;
+      font-family: $Lato !important;
+      padding: 5px;
+      margin:0 auto;
+      position: relative;
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        border-radius:10px ;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+          background: $gray; 
+          border-radius: 10px;
+      }
+
+      
+      .value{
+        padding-right:2px; 
+        width: max-content;
+        min-width: 50px;
+        border-right: 1px solid rgba($slightly-black,0.2);
+      }
+      .currency{
+        background-image: url('/assets/images/arrow-black.png');
+        background-repeat: no-repeat;
+        background-position: right center;
+        background-size: 10px;
+        padding-left: 2px;
+        padding-right: 15px; 
+        width: max-content;
+      }
+      .options {
+        width: max-content;
+        border-radius: 2px;
+        background-color: $white;
+        position: absolute;
+        right: 0;
+        top: 28px;
+        padding: 0 4px;
+        overflow: scroll;
+        z-index: 1;
+        .option{
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          color: $primary;
+          height: 40px;
+          padding: 5px 8px;
+          cursor: pointer;
+          img{
+            width: 5%;
+          }
+          &:hover{
+            background-color: #F6F7F9;
+          }
+        }
+      }
+    }
+    .balance {
+      color: $black;
+      font-size: 26px;
+      font-weight: bold;
+      line-height: 28px;
+      text-align: center;
+      font-family: $Lato;
+      margin-top: 5px;
+    }
+    .action-buttons{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button{
+        width: auto;
+        border-width: 0;
+        border-radius: 4px;
+        font-size: 15px;
+        color: $white;
+        padding: 10px 20px;
+        min-width: 100px;
+        background-color: $primary;
+        font-family: $Lato;
+      }
+    }
+    .option-tabs{
+      ::-webkit-scrollbar {
+        width: 2px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        border-radius:10px ;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+          background: $gray; 
+          border-radius: 10px;
+      }
+      display: block;
+      .selection-buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .selection-button{
+          padding-left: 16px;
+          padding-right: 15px;
+          width: 47%;
+          height: 40px;
+          border-width:0;
+          outline: none;
+          font-family: $Lato;
+          font-size: 13px;
+          // transition-duration: 1s;
+        }
+      }
+      .selected-tab-data{
+        margin: 0 auto;
+        width: 94%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 250px;
+        margin-bottom: 20px;
+        .row{
+          background-color: $background-color;
+          height: 77px;
+          padding: 10px 15px;
+          border-bottom: 1px solid #eee;
+          font-family: $Lato;
+          &:hover{
+            background-color: $row-hover;
+          }
+        }
+      }
+    }
+  }
+  .header{
+    width: 100%;
+    .account-info{
+      width: 50%;
+      font-family: $Lato;
+    }
+    .actions{
+      float: right;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $Lato;
+
+    }
+  }
+  .info-data{
+    padding: 10px;
+    background-color: $white;
+    width: 80%;
+    margin: 0 auto;
+    .title{
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 19px;
+      font-family: $Lato !important;
+    }
+    .desc{
+      font-size: 12px;
+      line-height: 15px;
+      font-family: $Lato !important;
+      color: rgba($secondary-text,0.8);
+    }
+    .action-links{
+      position: absolute;
+      bottom: 40px;
+      .link{
+        cursor: pointer;
+        padding:5px 0;
+        a{
+          color: $primary;
+          font-size: 14px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.sideMenu{
+  
+  .circle{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 15px;
+  }
+
+  select{
+    all: unset;
+    color:$white;
+    font-size: 15px;
+    font-family: $Lato !important;
+    background-image:url('/assets/images/down-arrow-white.png');
+    background-color: $primary;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: right;
+    background-position-y: center;
+    background-size: 15px;
+    padding-right: 20px;
+    padding-bottom: 3px;
+    margin-left:15px; 
+  }
+  .actions{
+    height: 100%;
+    position: relative;
+    .action{
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      li{
+        width: 95%;
+        padding: 12px 5px;
+        cursor: pointer;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        &:hover{
+          background-color: #1753CA;
+          background-image: url('/assets/images/white-selector.png');
+          background-position-x: left;
+          background-repeat: no-repeat;
+          background-size: 3%; 
+        }
+        .icon{
+          width: 7%;
+          float: left;
+          margin-right:20px;
+          margin-left: 37px;
+        }
+        .value{
+          text-align: left;
+          width: 90%;
+          font-size: 12px;
+          color: $white;
+        }
+      }
+    }
+  }
+  .logout{
+    padding: 10px;
+    border-top: 1px solid rgba($white,0.2);
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    .icon{
+      margin-left: 37px;
+      width: 7%;
+      float: left;
+      margin-right:20px;
+    }
+    .value{
+      text-align: left;
+      widows: 90%;
+      font-size: 12px;
+      color: $white;
+    }
+  }
+}
+
+.sideSettings{
+  .heading{
+    width:70%;
+    .title{
+      font-size: 17px;
+      color:$secondary;
+      text-align: center;
+      padding-bottom: 10px;
+      font-weight: bold;
+    }
+  }
+  .body{
+    ul{
+      all: unset;
+      li{
+        cursor: pointer;
+        text-align: center;
+        width: 90%;
+        padding: 18px 16px;
+        min-height: 20px;
+        &:hover{
+          background-color: #ECF3FF;
+        }
+        .icon{
+          width: 10%;
+          float: left;
+          margin-right:20px;
+          margin-left: 37px;
+        }
+        .value{
+          text-align: left;
+          widows: 90%;
+          font-size: 12px;
+          color: $primary;
+        }
+      }
+      li.selected{
+        background-color:#ECF3FF;
+        background-image: url('/assets/images/blue-selector.png');
+        background-position-x: left;
+        background-repeat: no-repeat;
+        background-size: 5%; 
+      }
+    }
+    .selectDropdown{
+      width: 70%;
+      border: 2px solid $primary;
+      border-radius: 4px;
+      padding: 16px;
+      margin-left: 20px;
+      img{
+        width: 5%;
+      }
+    }
+    .selectOptions{
+      width: 70%;
+      margin-left: 20px;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 0 0 1px #E0E7EE;
+      .option{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        img{
+          width: 5%;
+        }
+        padding:5px;
+        &:hover{
+          background-color: #F6F7F9;
+        }
+      }
+    }
+  }
+}
+

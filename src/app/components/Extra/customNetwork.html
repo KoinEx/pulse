@@ -1,0 +1,50 @@
+<div class="top-header" title="Add Custom Network">
+  <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+</div>
+<div class="border-form margin-top-30">
+  <div class="elements">
+    <label> This connects to your self-hosted EOS network  </label>
+  </div>
+  <div class="elements">
+    <label for="name"> Name </label>
+    <input autocomplete="off" type="text" name="name" ng-model="vm.customNetwork.name" placeholder="My Custom Network">
+  </div>
+
+  <div class="elements">
+    <label for="protocol"> Protocol </label>
+    <input autocomplete="off" type="text" name="protocol" ng-model="vm.customNetwork.protocol" placeholder="http/https">
+  </div>
+
+  <div class="elements">
+    <label for="host"> Host </label>
+    <input autocomplete="off" type="text" name="host" ng-model="vm.customNetwork.host" placeholder="localhost">
+  </div>
+
+  <div class="elements">
+    <label for="port"> Port </label>
+    <input autocomplete="off" type="text" name="port" ng-model="vm.customNetwork.port" placeholder="3000">
+  </div>
+
+
+  <div class="elements">
+    <div class="error" ng-show="vm.error"> {{vm.error}} </div>
+  </div> 
+
+  <div class="elements flex-sapce-bw margin-bottom-10 margin-top-10">
+    <button ng-class="vm.ladda ? 'cancel_button margin-right-10': 'cancel_button margin-right-10' " ng-click="vm.ladda || vm.gotoDashboard()" ><span ng-if="!vm.ladda">CANCEL</span> <div ng-if="vm.ladda" class="indicator"> 
+      <svg width="16px" height="12px">
+        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+      </svg>
+    </div> 
+    </button>
+    <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-10' :'submit_button margin-left-10'">
+      <button class="width-100" ng-click="vm.ladda || vm.addNetwork()" ><span ng-if="!vm.ladda">ADD</span> <div ng-if="vm.ladda" class="indicator"> 
+        <svg width="16px" height="12px">
+          <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        </svg></div> 
+      </button>
+    </div>
+  </div>
+</div>

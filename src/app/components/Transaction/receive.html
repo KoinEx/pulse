@@ -1,0 +1,25 @@
+<div class="top-header" title="Receive">
+  <button class="right" ng-click="vm.gotoDashboard()"></button>
+</div>
+<div class="receive-tokens" ng-init="vm.init()">
+  <div class="title">Your public wallet address</div>
+  <div class="desc margin-top-10">Use this address to receive funds</div>
+  <div class="qrcode-show margin-bottom-40 margin-top-30">
+    <qrcode data="EOS:{{vm.accountName}}" size="80" download  ></qrcode> 
+  </div>
+  <div class="middle-border margin-top-50">
+      <div class="dashed-border width-100" ></div> 
+  </div>
+  <div class="width-100">
+    <div class="name pointer tooltip center-flex margin-top-50" clipboard text="vm.accountName" on-copied="vm.success()" on-error="vm.fail(err)" tooltip-text="{{vm.copyText}}">
+      <span>{{ vm.accountName }}</span> 
+      <span class="margin-left-10 width-4">
+        <img src="/assets/images/copy-icon.png" alt="copy-icon" class="width-100">
+      </span> 
+    </div>
+  </div>
+  <div class="margin-auto width-100 margin-top-20 center-flex">
+    <a ng-href="https://{{vm.currentNetwork == 'testnet' ? 'jungle.' : '' }}bloks.io/account/{{vm.accountName}}" target="_blank"> check your account on explorer</a>
+  </div>
+</div>
+ 

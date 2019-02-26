@@ -1,0 +1,54 @@
+<div class="top-header" title="Pay Network Fee">
+  <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+</div>
+<div class="fees" ng-init="vm.init()">
+  <div class="network">
+    <img src="/assets/images/green-circle.png" alt="" style="width:3%;">
+    <label class="margin-left-10">mainnet</label>
+  </div>
+  <div class="desc margin-top-10">
+      Use a wallet or an exchange to send mainnet fee to the EOS blockchain and enter transaction ID below.
+  </div>
+</div>
+<div class="eos-form margin-top-10">
+  <div class="elements ">
+    <label > Amount </label>
+    <div class="input tooltip center-flex justify-start secondary-background" clipboard text="vm.fees" on-copied="vm.success()" on-error="vm.fail(err)" tooltip-text="{{vm.copyText}}">
+      <label class="margin-left-10 ellipses width-80"> {{vm.fees}} </label>
+      <img src="/assets/images/copy-icon.png" alt="" class="right-0">
+    </div>
+  </div>
+  <div class="elements">
+    <label > Send To </label>
+    <div class="color-secondary-text margin-top-10">This is an EOS creator account which creates your account on the EOS blockchain.</div>
+    <div class="input tooltip center-flex justify-start secondary-background"  clipboard text="vm.creator" on-copied="vm.success()" on-error="vm.fail(err)" tooltip-text="{{vm.copyText}}">
+      <label class="margin-left-10 ellipses width-80"> {{vm.creator}} </label>
+      <img src="/assets/images/copy-icon.png" alt="" class="right-0" >
+    </div>
+  </div>
+  <div class="elements ">
+    <label > Memo  </label>
+    <div class="input tooltip center-flex justify-start secondary-background" clipboard text="vm.memo" on-copied="vm.success()" on-error="vm.fail(err)" tooltip-text="{{vm.copyText}}">
+      <label class="margin-left-10 ellipses width-80"> {{vm.memo}} </label>
+      <img src="/assets/images/copy-icon.png" alt="" class="right-0">
+    </div>
+  </div>
+
+  <div class="elements">
+    <label for="txnID"> Transaction Id </label>
+    <input type="text" autocomplete="off"  ng-model="vm.txnID" id="txnID">
+  </div>
+
+  <div class="elements" ng-show="vm.error">
+    <div class="error">{{vm.error}}</div>
+  </div>
+  <div class="submit_button margin-top-10 margin-bottom-10">
+    <button ng-click="vm.ladda || vm.verifyTxn()" ><span ng-if="!vm.ladda"> Continue </span> <div ng-if="vm.ladda" class="indicator"> 
+        <svg width="16px" height="12px">
+          <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        </svg>
+        </div> 
+    </button>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="top-header" title="{{vm.selectedOperation}}">
+  <button class="right" ng-click="vm.ladda || vm.gotoDashboard()"></button>
+</div>
+
+<div class="cpuInfo">
+  <div class="card margin-top-20">
+    <div class="left-section">
+      <img src="/assets/images/wallet.png" alt="wallet" class="width-10">
+      <div class="title">Available Balance</div>
+      <div class="data margin-top-10">{{vm.accountName}}</div>
+      <div class="data">{{vm.balance}} EOS</div>
+    </div>
+    <div class="right-section">
+      <div class="title margin-bottom-10">Net Available</div>
+      <div class="data">{{ vm.netInfo.available }} Bytes</div>
+      <div class="title margin-bottom-10">CPU Available</div>
+      <div class="data">{{ (vm.cpuInfo.available)/1000 }} ms</div>
+    </div>
+  </div>
+  <div class="option-tabs margin-top-20">
+      <div class="selection-buttons">
+          <button ng-class="vm.selectedOperation == 'delegate' ? 'selected selection-button color-gray bold text-center' : 'selection-button color-gray bold text-center' " ng-click="vm.cpuOperation('delegate')"> Delegate </button>
+        <button ng-class="vm.selectedOperation == 'undelegate' ? 'selected selection-button color-gray bold text-center' : 'selection-button color-gray bold text-center' " ng-click="vm.cpuOperation('undelegate')"> Undelegate </button>
+      </div>
+      <div class="selected-tab-data">
+          <div class="border-form">
+            <div class="elements">
+              <label class="capitalize"> {{vm.selectedOperation}} CPU </label>
+              <div class="input center-flex">
+                <input type="number" ng-model="vm.transaction.CPU_quantity" placeholder="0.0000" required ng-blur="vm.decimalPrecision()">
+                <div class="dropdown">{{vm.transaction.symbol}}</div>
+              </div>
+            </div>
+            <div class="elements">
+              <label class="capitalize"> {{vm.selectedOperation}} Net </label>
+              <div class="input center-flex">
+                <input type="number" ng-model="vm.transaction.net_quantity" placeholder="0.0000" required ng-blur="vm.decimalPrecision()">
+                <div class="dropdown">{{vm.transaction.symbol}}</div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="border-form">
+    <div class="elements margin-top-10">
+      <div class="error" ng-show="vm.error"> {{vm.error}} </div>
+    </div> 
+    <div class="elements flex-sapce-bw margin-left-10 position-bottom">
+      <button ng-class="vm.ladda ? 'cancel_button margin-right-10': 'cancel_button margin-right-10' " ng-click="vm.ladda || vm.gotoDashboard()" ><span ng-if="!vm.ladda">CANCEL</span> <div ng-if="vm.ladda" class="indicator"> 
+        <svg width="16px" height="12px">
+          <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+          <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+        </svg>
+      </div> 
+      </button>
+      <div ng-class="vm.ladda ? 'opacity-50 submit_button margin-left-10' :'submit_button margin-left-10'" >
+        <button class="width-100" ng-click="vm.ladda || vm.submitRequest()" ><span ng-if="!vm.ladda" class="uppercase">{{vm.selectedOperation}}</span> <div ng-if="vm.ladda" class="indicator"> 
+            <svg width="16px" height="12px">
+              <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+              <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg>
+            </div>
+          </button>
+      </div>
+    </div>
+  </div>
+</div> 

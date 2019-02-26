@@ -1,0 +1,47 @@
+.receive-tokens{
+  margin: 0 auto;
+  margin-top: 35px;
+  // width: 80% !important;
+  .title{
+    font-family: $Lato !important;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 19px;
+    color: $black;
+    text-align: center;
+  }
+  .desc{
+    color:$slightly-black;
+    text-align: center;
+    line-height: 15px;
+    font-size: 12px;
+    font-family: $Lato !important;
+  }
+  .name{
+    background-color: #F5F6FA;
+    width: 60%;
+    font-size: 18px;
+    line-height: 23px;
+    margin: 0 auto;
+    padding: 12px;
+    border-radius: 2px;
+  }
+  .qrcode-show{
+    width: 120px;
+    height: 120px;
+    background: url('/assets/images/qr-code.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin:0 auto;
+    canvas{
+      margin-left: 19px !important;
+      margin-top:19px !important;
+    }
+  }
+
+  a{
+    text-decoration: none;
+    color: $primary;
+  }
+}

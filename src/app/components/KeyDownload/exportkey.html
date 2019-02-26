@@ -1,0 +1,60 @@
+<div class="header">
+    <div class="top-logo" align="center">
+        <img src="/assets/images/logo-white.png" alt="" class="width-11">
+    </div>  
+    <div class="name uppercase">EOS Pulse</div>
+  </div>
+  <div class="home margin-top-20">
+    <div class="login-header">
+      <div class="title"> Export Private Key </div>
+      <div class="desc margin-top-10">Export your Private Key in CSV and save it for backup</div>
+    </div>
+    <div class="progress-line margin-top-20 margin-bottom-20">
+      <div class="custom-hr width-50"></div>
+      <div class="custom-hr width-50"></div>
+    </div>
+  </div>
+  <div class="eos-form">
+    <div class="elements text-center">
+      <img src="/assets/images/key.png" class="width-40" alt="">
+    </div>
+    <div class="elements margin-top-30">
+      <label > Password </label>
+      <div class="title font-12 margin-top-10" style="opacity: 0.7;">Enter your Pulse password</div>
+      <div class="input center-flex">
+          <input autocomplete="off" type="{{vm.typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" ng-model="vm.password" class="width-100" ng-change="vm.keyDownload()">
+          <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
+      </div>
+    </div>
+    <!-- <div class="elements">
+        <label clipboard text="vm.privateKey" on-copied="vm.successClipboard()" on-error="vm.fail(err)" class="submit_button pointer"> Click to copy your privateKey</label>
+    </div> -->
+    <div class="elements" ng-show="vm.error">
+      <div class="error" > {{vm.error}} </div>
+    </div>
+    
+    <div class="elements flex-sapce-bw position-bottom margin-left-10">
+      <button type="button" ng-click="vm.goToNextPage()"  class="cancel_button  margin-right-10"> Cancel </button>
+      <div class="submit_button margin-left-10">
+          <button  ng-click="vm.ladda || vm.success()" ng-class=" vm.ladda  ? 'opacity-50 width-100' :'width-100' " ng-if="!vm.privateKeyArray.length || vm.ladda" ><span ng-if="!vm.ladda">Export</span> 
+              <div ng-if="vm.ladda" class="indicator"> 
+                  <svg width="16px" height="12px">
+                      <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                      <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                  </svg>
+              </div> 
+          </button>
+          <button  class="width-100" ng-csv="vm.privateKeyArray" filename="{{vm.accountName}}.csv" ng-click="vm.exportKey()"  csv-header="['account_name','private_key']"  ng-if="vm.privateKeyArray.length && !vm.ladda" ><span ng-if="!vm.ladda">Export</span> 
+              <div ng-if="vm.ladda" class="indicator"> 
+                  <svg width="16px" height="12px">
+                      <polyline id="back1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                      <polyline id="front1" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                  </svg>
+              </div> 
+          </button>
+      </div>
+      <!-- <button type="button" ng-click="vm.password == false || vm.exportKey()"  ng-class="vm.password ? 'submit_button' :'disabled_button' " ng-if="!vm.privateKeyArray.length" style="width:44%;"> Export </button>
+      <button type="button" ng-csv="vm.privateKeyArray" filename="{{vm.accountName}}.csv" ng-click="vm.exportKey()"  csv-header="['account_name','private_key']" class="submit_button" ng-if="vm.privateKeyArray.length" style="width:44%;"> Export </button> -->
+    </div>
+  </div>   
+  
