@@ -1,6 +1,6 @@
 # PULSE -  Chrome Extension for EOS.
 
-Pulse is an open source browser extension for EOS blockchain. It is the gateway to send, receive or stake EOS and its custom tokens. It enables easy integration with customised dApps and supports multiple accounts on various EOS networks.
+Pulse is an open source browser extension for EOS blockchain. It enables easy integration with customised dApps and supports multiple accounts on various EOS networks.
 Pulse can be used to transact all EOS based tokens. One can send, receive or stake EOS and its custom tokens from wallets and exchanges globally. One can easily contribute to the Pulse source code or can even create multiple extensions on top of it. The open repository even allows developers to create similar dApps such as Pulse. It features a Private mode which if enabled helps in protecting sensitive information from connected dApps
 
 ## Dapp Developers
@@ -57,6 +57,16 @@ options = {param1:"value", ... } // params for contract action
   }
  } 
  
+```
+
+## Error Codes
+
+```js
+  code : '30152' // user rejected the requests
+  code : '30153' // privacy mode is on
+  code : '30156' // no account configured yet
+  code : '30157' // missing required fiels
+
 ```
 
 ### Prerequisites
