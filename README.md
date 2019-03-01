@@ -12,7 +12,7 @@ pulse object can be accessed from every js enabled website under window object.
 
 All the functions provided below are return promises which have to be handled.
 
-pulse contains a varibale network which provides selected network 
+pulse contains a variable network which provides selected network 
 
 
 1. pulse.connect() : To connect the Dapp with extension.
