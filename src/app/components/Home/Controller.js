@@ -118,7 +118,7 @@ export default class Homecontroller {
       this.state.go('recoverAccount');
     }
 
-    resetError(){ // to reset the error when user presses any thing
+    resetError(){ // to reset the error when user presses anything
       setTimeout(()=>{
         this.error = '';
       },2000)

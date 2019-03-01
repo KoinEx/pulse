@@ -2,7 +2,7 @@ import {  Database_Controllers,Channel_Names,Networks,Conversion_Rates } from '.
 import { config } from '../../config/config';
 
 export default class DashboardController {
-  // dashboard contraoller
+  // dashboard controller
   constructor(StorageService,AccountService,EosService,$scope,$state,$rootScope){
     this.store = StorageService;
     this.accountService = AccountService;
@@ -90,7 +90,7 @@ export default class DashboardController {
     }
   }
 
-  async getAccountInfo(){ // this is to poll for user balances anf cpu limits
+  async getAccountInfo(){ // this is to poll for user balances and cpu limits
     this.accountsController = await this.store.get(Database_Controllers.ACCOUNT_CONTROLLER.NAME);
     this.defaultCurrency = this.accountsController[Database_Controllers.ACCOUNT_CONTROLLER.DEFAULT_CURRENCY];
     this.defaultToken = this.accountsController[Database_Controllers.ACCOUNT_CONTROLLER.DEFAULT_TOKEN];
@@ -212,7 +212,7 @@ export default class DashboardController {
     setTimeout(async()=>{
       clearInterval(this.syncBalanceController);
       this.syncBalanceIsRunning =false;
-      await this.store.setState('exportKey','dashboard'); // second argumnent is where to redirect after export
+      await this.store.setState('exportKey','dashboard'); // second argument is where to redirect after export
       this.state.go('exportKey');
     },800);
     this.toggleMenu();
@@ -240,7 +240,7 @@ export default class DashboardController {
     this.toggleMenu();
   }
 
-  async importAccount(){ // naviagte to import account page with animation
+  async importAccount(){ // navigate to import account page with animation
     setTimeout(async ()=>{
       clearInterval(this.syncBalanceController);
       this.syncBalanceIsRunning =false;
@@ -250,7 +250,7 @@ export default class DashboardController {
     this.toggleMenu();
   }
 
-  async importEOSAccount(){ // naviagte to import account page without animation
+  async importEOSAccount(){ // navigate to import account page without animation
     clearInterval(this.syncBalanceController);
     this.syncBalanceIsRunning =false;
     await this.store.set({is_forgotAccount:true});
@@ -258,7 +258,7 @@ export default class DashboardController {
     this.state.go('register');
   }
 
-  async changeNetwork(value){ // this is for network change and upadte the all configs accourding to that
+  async changeNetwork(value){ // this is for network change and update all configs according to that
     clearInterval(this.syncBalanceController);
     this.dropdown=false;
     this.balance='';
@@ -300,7 +300,7 @@ export default class DashboardController {
     return false;
   }
 
-  gotoUrl(txn_id){ // this to go to the block explorer
+  gotoUrl(txn_id){ // this is to go to the block explorer
     if(this.currentNetwork == Networks.TESTNET || this.currentNetwork == Networks.MAINNET)
     {
       const network_url = this.currentNetwork == Networks.TESTNET ? 'jungle.' :'';

@@ -1,7 +1,7 @@
 import { Database_Controllers,Networks,Errors,Channel_Names } from '../../constants/enums';
 import to from 'await-to-js';
 export default class CustomController {
-  // custom controller for addon features netwotk,adding token, and CPU delegation and undelegation
+  // custom controller for addon features such as network,adding token and CPU delegation and undelegation
   constructor(StorageService,EosService,ValidationService,$state,$scope){
     this.store = StorageService;
     this.customNetwork = {};
@@ -42,7 +42,7 @@ export default class CustomController {
     }
   }
 
-  async submitRequest(){ // this for the cpu delegation and undelegation
+  async submitRequest(){ // this is for the cpu delegation and undelegation
     this.ladda = true;
     this.transaction.type = this.selectedOperation;
     const validationResponse = await this.validationService.validatePartialDelicateTxn(this.transaction);
@@ -88,7 +88,7 @@ export default class CustomController {
         this.error = Errors.DUPLICATE_NETWORK_NAME;
         this.ladda = false;
         this.scope.$apply();
-        return ;
+        return;
       }
     });
 
@@ -99,7 +99,7 @@ export default class CustomController {
     });
 
     const httpEndPoint = `${this.customNetwork.protocol}://${this.customNetwork.host}:${this.customNetwork.port}`;
-    const [errorGettingInfo,networkInfo] = await to(this.eosService.getInfo(httpEndPoint)); // checking if node is runnig
+    const [errorGettingInfo,networkInfo] = await to(this.eosService.getInfo(httpEndPoint)); // checking if node is running
 
     if(errorGettingInfo){
       this.error=Errors.WRONG_NODE_ADDRESS;

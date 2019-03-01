@@ -1,7 +1,7 @@
 import { Database_Controllers,External_Channels,Error_Codes} from '../../constants/enums';
 
 export default class CommunicationController {
-  // this controller is fot connecting a user user to the dapps
+  // this controller is for connecting a user to the dapps
   constructor(StorageService,$scope){
     this.store = StorageService;
     this.scope = $scope;

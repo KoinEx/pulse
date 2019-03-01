@@ -1,6 +1,6 @@
 import to from 'await-to-js';
 import { Transaction_Status,Database_Controllers,External_Channels,Error_Codes } from '../../constants/enums';
-import { HASH } from 'crypto-js';
+// import { HASH } from 'crypto-js';
 
 export default class TransactionController {
   
@@ -52,7 +52,7 @@ export default class TransactionController {
     }
     tempController[Database_Controllers.EXTRA.TEMP_DATA]={};
     const tempData = {};
-    tempData[Database_Controllers.EXTRA.NAME] = tempController;;
+    tempData[Database_Controllers.EXTRA.NAME] = tempController;
     this.reciepents = this.getReciepents();
     await this.store.set(tempData);
     await this.getAllAvailableTokens();
@@ -60,7 +60,7 @@ export default class TransactionController {
   }
 
 
-  getReciepents(){ // to create the array of Reciepents
+  getReciepents(){ // to create the array of Recipients
     const allUniqueReciepents = {};
     this.transactionHistory.map((transaction)=>{
       if(transaction.network == this.currentNetwork && transaction.status == Transaction_Status.COMPLETED && transaction.data.to){
@@ -117,7 +117,7 @@ export default class TransactionController {
    }
   } 
 
-  async saveTransaction(transaction){ // save the transaction to the chrom storage after sucess
+  async saveTransaction(transaction){ // save the transaction to the chrome storage after success
     let transactions = this.transactionController[Database_Controllers.TRANSACTION_CONTROLLER.HISTORY] || [];
     let pendingTransactions = this.transactionController[Database_Controllers.TRANSACTION_CONTROLLER.PENDING] || [];
     pendingTransactions.push(transactions.length);
@@ -129,7 +129,7 @@ export default class TransactionController {
     this.store.setTransaction(transactionController);
   }
 
-  async saveFailedTransactions(error,transaction){ // save the transaction to the chrom storage after failure
+  async saveFailedTransactions(error,transaction){ // save the transaction to the chrome storage after failure
     const errorObject = error,
           reason = errorObject.error.details[0].message.split(':')[1] || errorObject.error.details[0].message;
     transaction.quantity = transaction.amount ? transaction.amount.toString() + " " + transaction.symbol.toString() : undefined;
@@ -227,7 +227,7 @@ export default class TransactionController {
   }
 
 
-  hasTokens(){ // check if users has any availabe tokens
+  hasTokens(){ // check if user has any availabe tokens
     return Object.keys(this.availableTokens).length;
   }
 
@@ -317,7 +317,7 @@ export default class TransactionController {
     this.state.go('transactionStatus');
   }
 
-  async getTransactionHistory(){ // to retrive transaction histrory
+  async getTransactionHistory(){ // to retrive transaction history
     await this.init();
     this.transactionHistory = this.transactionController[Database_Controllers.TRANSACTION_CONTROLLER.HISTORY].sort((first,second)=> second.submitted_at - first.submitted_at );
     this.scope.$apply();

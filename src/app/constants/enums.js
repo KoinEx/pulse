@@ -1,4 +1,4 @@
-// all the contansts used in the project
+// all the contants used in the project
 
 
 const Transaction_Status = Object.freeze({

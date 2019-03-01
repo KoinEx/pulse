@@ -1,6 +1,6 @@
 <div class="header">
     <div class="top-logo" align="center">
-        <img src="/assets/images/logo-white.png" alt="" class="width-11">
+        <img src="/assets/images/logo-white.png" alt="pulse-logo" class="width-11">
     </div>  
     <div class="name uppercase">EOS Pulse</div>
   </div>
@@ -26,9 +26,6 @@
           <i class="{{vm.typePassword ? 'password' : 'text'}}-icon pointer" ng-click="vm.togglePassword()"></i>
       </div>
     </div>
-    <!-- <div class="elements">
-        <label clipboard text="vm.privateKey" on-copied="vm.successClipboard()" on-error="vm.fail(err)" class="submit_button pointer"> Click to copy your privateKey</label>
-    </div> -->
     <div class="elements" ng-show="vm.error">
       <div class="error" > {{vm.error}} </div>
     </div>
@@ -53,8 +50,6 @@
               </div> 
           </button>
       </div>
-      <!-- <button type="button" ng-click="vm.password == false || vm.exportKey()"  ng-class="vm.password ? 'submit_button' :'disabled_button' " ng-if="!vm.privateKeyArray.length" style="width:44%;"> Export </button>
-      <button type="button" ng-csv="vm.privateKeyArray" filename="{{vm.accountName}}.csv" ng-click="vm.exportKey()"  csv-header="['account_name','private_key']" class="submit_button" ng-if="vm.privateKeyArray.length" style="width:44%;"> Export </button> -->
     </div>
   </div>   
   

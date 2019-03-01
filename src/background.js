@@ -11,7 +11,7 @@ const allowedWebsites = {},store = chrome.storage.local,base_url= `${protocol}:/
 
 // background daemon script
 
-const init = async ()=>{ // initialize the network and eos and add network monitor event
+const init = async ()=>{ // initialize the network, eos and add network monitor event
   const networkController = await get(Database_Controllers.NETWORK_CONTROLLER.NAME),
   CUSTOM_NETWORKS= networkController[Database_Controllers.NETWORK_CONTROLLER.CUSTOM_NETWORKS] || {};
   networkType = networkController[Database_Controllers.NETWORK_CONTROLLER.TYPE];
@@ -100,7 +100,7 @@ const setTransaction=(data)=>{ // set Transactions to chrome storage
   })
 }
 
-const storeTransaction = async (message)=>{ // store a temp transaction
+const storeTransaction = async (message)=>{ // store a temporary transaction
   const transactionController = await getTransactions() || {};
   transactionController[Database_Controllers.TRANSACTION_CONTROLLER.TRANSACTION] = message;
   const transactionData = {};
@@ -109,7 +109,7 @@ const storeTransaction = async (message)=>{ // store a temp transaction
 }
 
 
-const addHostToAllowedList = (Host)=>{ // check if requestor is allowed or not to access the data
+const addHostToAllowedList = (Host)=>{ // check if requestor is allowed to access the data
   allowedWebsites[Host]=true;
 }
 
@@ -161,7 +161,7 @@ const getEosBalance = async currency_balances =>{ // get eos balance
   });
 }
 
-const syncBalance = async () => { // sync users balance
+const syncBalance = async () => { // sync user's balance
   const accountsController = await get(Database_Controllers.ACCOUNT_CONTROLLER.NAME);
   if(accountsController[Database_Controllers.ACCOUNT_CONTROLLER.SELECTED]){
     let account_name = accountsController[Database_Controllers.ACCOUNT_CONTROLLER.SELECTED],
@@ -269,7 +269,7 @@ const bootstrap = async ()=>{ // initialize the extention with neccesary data on
 
 
 
-const addNewEvent = async ()=>{ // add an network moniter to check for any pushtransactions
+const addNewEvent = async ()=>{ // add a network moniter to check for any push transactions
   if(chrome.webRequest.onCompleted.hasListeners()) {
     chrome.webRequest.onCompleted.removeListener(networkMonitor);
     chrome.webRequest.onCompleted.addListener(networkMonitor,{urls: [`${configEos.httpEndpoint}/v1/chain/push_transaction`]});
@@ -298,7 +298,7 @@ chrome.notifications.onClicked.addListener(async (id)=>{
   } else if ( network == Networks.MAINNET) {
     window.open(`https://bloks.io/transaction/${id}`,'_blank');
   } else {
-    // we dont have explorers for these tnx user has to check manually;
+    // we dont have explorers for these tnx. User has to check manually;
   }
   chrome.notifications.clear(id);
 });

@@ -40,7 +40,7 @@ export default class KeyDownloadController {
     this.state.go(next_state);
   }
   
-  async success(){ // when a key is downloaded successfull naviagte to the redirect page
+  async success(){ // when a key is downloaded successfully navigate to the redirect page
     this.ladda = true;
     if(HASH(this.password + (await this.encryptionService.decryptSalt(this.password,this.salt))).toString()!==this.pass) {
       this.error= Errors.PASSWORD_MISMATCH;
@@ -73,7 +73,7 @@ export default class KeyDownloadController {
    this.error=Errors.RETRY;
   }
 
-  async keyDownload(){ // to check for password if correct change the button (for more deatils check keydownload.html)
+  async keyDownload(){ // to check for password, if correct change the button (for more details check keydownload.html)
     this.ladda = false;
     this.error = '';
     if(!this.password){
