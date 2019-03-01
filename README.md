@@ -5,7 +5,7 @@ Pulse can be used to transact all EOS based tokens. One can send, receive or sta
 
 ## Dapp Developers
 
-Following API are exposed for Dapp Development :
+Following API are exposed for Dapp Development  :
 
 ```js
 pulse object can be accessed from every js enabled website under window object.
@@ -45,7 +45,7 @@ options = {param1:"value", ... } // params for contract action
  if (pulse){
   // extension installed
  
-  const network = pusle.network;
+  const network = pulse.network;
   if (network != "mainnet"){  
    // user is not on mainnet ask to switch if required
    // do pulse.init() to get the pulse object updated without and re-assign the network = pusle.network; 
